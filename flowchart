@@ -1,0 +1,12 @@
+flowchart TD
+    A["User Device<br>(Phone/Computer)"] --> B["🔐 Login with Apple ID<br>& XION Meta Account"]
+    A --> C["🎵 Sensory Experience<br>Rangi's 7-Bell H.R.I."]
+    
+    B --> D[["⛓️ XION Blockchain<br>Gasless TXs with USDC"]]
+    D --> E[["💸 Kraken Integration<br>Liquidity & Fiat On-Ramps"]]
+    
+    C --> F[["🤖 AWS Bedrock & Lambda<br>The AI Agent Brain"]]
+    F --> G["📊 Market Analysis &<br>Sensory Signal Generation"]
+    
+    E --> G
+    G --> C
