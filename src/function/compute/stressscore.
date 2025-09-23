@@ -1,0 +1,14 @@
+function computeStressScore(holdingsData):
+    stressComponents = []
+    for symbol in holdingsData:
+        vol = std_dev(holdingsData[symbol].prices[-30:]) / mean(holdingsData[symbol].prices[-30:])
+        rsi = holdingsData[symbol].indicators.RSI / 100
+        volumeChange = (holdingsData[symbol].volume - avg_volume) / avg_volume
+        stressComponents.append( (vol * 0.4 + rsi * 0.3 + abs(volumeChange) * 0.3) )
+    aggregateStress = average(stressComponents)
+    return aggregateStress  // 0-1, higher = more stress
+
+function triggerAlert(stressScore, threshold):
+    if stressScore > threshold:
+        sensory = generateSensory(aggregateStress, baseFreq=432)  // From Unified Energy
+        sendNotification(sensory, "Market stress is high for your holdings.")
