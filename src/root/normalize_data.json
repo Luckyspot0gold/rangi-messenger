@@ -1,0 +1,37 @@
+function normalizeData(inputData):
+    # Normalize indicators to 0-1 scale based on repo patterns (e.g., RSI 0-100 -> 0-1)
+    normalized = {}
+    normalized['RSI'] = inputData.indicators.RSI / 100
+    normalized['MACD'] = clamp((inputData.indicators.MACD + 200) / 400, 0, 1)  # Arbitrary range based on typical values
+    normalized['BollingerPosition'] = (inputData.price - inputData.indicators.BollingerBands.lower) / 
+                                      (inputData.indicators.BollingerBands.upper - inputData.indicators.BollingerBands.lower)
+    normalized['FearGreed'] = inputData.indicators.FearGreedIndex / 100
+    normalized['Volume'] = log(inputData.volume) / log(max_volume_threshold)  # Log scale for volume
+
+    # Compute aggregate amplitude (weighted average from repo's H.R.I. concept)
+    amplitude = (normalized['RSI'] * 0.2 + normalized['MACD'] * 0.2 + 
+                 normalized['BollingerPosition'] * 0.2 + normalized['FearGreed'] * 0.2 + 
+                 normalized['Volume'] * 0.2)
+    return amplitude
+
+function generateWaveform(amplitude, baseFreq=432):
+    # Map amplitude to frequency shift (Fibonacci-inspired from repo descriptions)
+    fibShifts = [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]  # Fibonacci sequence
+    shiftIndex = floor(amplitude * (len(fibShifts) - 1))
+    freq = baseFreq + fibShifts[shiftIndex]  # Adjust frequency
+
+    # Map to tone/color based on user-defined mapping (e.g., 432Hz -> E/Yellow)
+    toneMap = {
+        432: {"tone": "E", "color": "Yellow"},
+        # Additional mappings: F->Blue, G->Purple, etc., scaled from amplitude
+    }
+    toneInfo = toneMap.get(round(freq), {"tone": "A", "color": "White"})  # Default to A/White
+
+    # Generate waveform params (sine wave for harmonic phonics)
+    waveform = {
+        "type": "sine",
+        "frequency": freq,
+        "amplitude": amplitude,
+        "duration": 5  # Seconds, adjustable
+    }
+    return {"waveform": waveform, "tone": toneInfo.tone, "color": toneInfo.color}
