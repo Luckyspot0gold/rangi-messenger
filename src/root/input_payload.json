@@ -1,0 +1,21 @@
+**Input Payload (Market Data Ingestion Example):**
+```json
+{
+  "asset": "BTC",
+  "data": {
+    "price": 65000.50,
+    "volume": 1200000000,
+    "indicators": {
+      "MACD": 150.25,
+      "RSI": 65,
+      "BollingerBands": {
+        "upper": 67000,
+        "middle": 65000,
+        "lower": 63000
+      },
+      "FearGreedIndex": 55
+    },
+    "timestamp": "2025-09-23T12:00:00Z"
+  }
+}
+```
