@@ -1,0 +1,11 @@
+{
+  "userId": "user123",
+  "holdings": ["AAPL", "MSFT", "VTI", "SPY", "TLT", "AGG"],
+  "alertThreshold": 0.75,  // Stress Score threshold (0-1 scale)
+  "notificationPrefs": {
+    "email": "user@example.com",
+    "phone": "+1234567890",
+    "haptic": true,
+    "audio": true
+  }
+}
