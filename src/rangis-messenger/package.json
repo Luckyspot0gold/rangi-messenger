@@ -1,0 +1,8 @@
+# In your rangis-messenger package.json - ensure you have:
+{
+  "dependencies": {
+    "@burnt-labs/abstraxion": "^1.4.1",
+    "@xionlabs/contracts": "^0.1.8",
+    "xion-signer": "^0.2.0"
+  }
+}
