@@ -1,0 +1,13 @@
+// pages/api/harmonic-demo.ts
+export default function handler(req, res) {
+  // Simple demo that proves the concept works
+  const demoData = {
+    message: "Rangi's Messenger - Harmonic Alert System",
+    status: "active",
+    frequencies: [432, 528, 741],
+    supportedConditions: ['calm', 'volatile', 'trend_change', 'critical'],
+    timestamp: Date.now()
+  };
+  
+  res.status(200).json(demoData);
+}
