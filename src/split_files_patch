@@ -1,0 +1,25 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: redacted <redacted@example.com>
+Date: Sat, 25 Oct 2025 00:00:00 +0000
+Subject: [PATCH] remove leaked mixed file, add split redacted files
+
+---
+ .gitignore                           | 11 +++++++++++
+ Secrets/env./marbles/coinbase_wallet.env.json | 22 ----------------------
+ app/layout.tsx                       | 46 ++++++++++++++++++++++++++++++++++++++
+ app/providers.tsx                    | 29 +++++++++++++++++++++++++
+ components/SmartWallet.tsx           | 70 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ scripts/cloudflare-ai-worker.js      | 32 +++++++++++++++++++++++++++
+ .env.example                         | 20 ++++++++++++++++++
+ .env.local                           | 13 +++++++++++
+ 9 files changed, 221 insertions(+), 22 deletions(-)
+ delete mode 100644 Secrets/env./marbles/coinbase_wallet.env.json
+ create mode 100644 app/layout.tsx
+ create mode 100644 app/providers.tsx
+ create mode 100644 components/SmartWallet.tsx
+ create mode 100644 scripts/cloudflare-ai-worker.js
+ create mode 100644 .env.example
+ create mode 100644 .env.local
+ create mode 100644 .gitignore
+-- 
+2.42.0
